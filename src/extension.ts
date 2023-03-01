@@ -1,25 +1,56 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+import { extensions, commands, window, ExtensionContext } from 'vscode';
+import { GitExtension, Repository } from "./git";
+import commitRules from "./config";
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+export function activate(context: ExtensionContext) {
+	const disposable = commands.registerCommand(
+		"vscodeGitCommit.setMessage",
+		(uri?) => {
+		  const gitExtension = getGitExtension();
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "git-commit-rules" is now active!');
+		  if (!gitExtension) {
+			window.showErrorMessage("请先安装git插件!");
+			return;
+		  }
+		  
+		  // 显示选项列表，提示用户选择
+		  window.showQuickPick(commitRules).then(function (values) {
+			if (values) {
+			  commands.executeCommand("workbench.view.scm");
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('git-commit-rules.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from git-commit-rules!');
-	});
+			  if (uri) {
+				let selectedRepository = gitExtension.repositories.find(repository => {
+				  return repository.rootUri.path === uri.rootUri.path;
+				});
+				if (selectedRepository) {
+				  prefixCommit(selectedRepository, values.code);
+				}
+			  } else {
+				for (let repo of gitExtension.repositories) {
+				  prefixCommit(repo, values.code);
+				}
+			  }
+			}
+		  });
+		}
+	);
 
 	context.subscriptions.push(disposable);
+}
+
+// 选完填入操作
+function prefixCommit(repository: Repository, prefix: String) {
+	repository.inputBox.value !== ""
+	  ? ((repository.inputBox.value = ""),
+		(repository.inputBox.value = `${prefix}${repository.inputBox.value}`))
+	  : (repository.inputBox.value = `${prefix}${repository.inputBox.value}`);
+}
+
+// 点击小图标进入插件
+function getGitExtension() {
+	const vscodeGit = extensions.getExtension<GitExtension>("vscode.git");
+	const gitExtension = vscodeGit && vscodeGit.exports;
+	return gitExtension && gitExtension.getAPI(1);
 }
 
 // This method is called when your extension is deactivated

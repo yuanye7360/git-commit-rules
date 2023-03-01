@@ -1,7 +1,7 @@
 {
   "name": "git-commit-rules",
-  "displayName": "git-commit-rules",
-  "description": "",
+  "displayName": "VSCode Git Commit Message",
+  "description": "Harmonize your git commit message with your colleagues",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.75.0"
@@ -9,16 +9,33 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+	"activationEvents": [
+		"vscodeGitCommit.setMessage",
+    "onStartupFinished"
+	],
   "main": "./out/extension.js",
+  "icon": "assets/logo.png",
   "contributes": {
-    "commands": [
-      {
-        "command": "git-commit-rules.helloWorld",
-        "title": "Hello World"
-      }
-    ]
-  },
+		"commands": [
+			{
+				"command": "vscodeGitCommit.setMessage",
+				"title": "Git prefix emote",
+				"icon": {
+					"dark": "assets/icon.svg",
+					"light": "assets/icon_light.svg"
+				}
+			}
+		],
+		"menus": {
+			"scm/title": [
+				{
+					"when": "scmProvider == git",
+					"command": "vscodeGitCommit.setMessage",
+					"group": "navigation"
+				}
+			]
+		}
+	},
   "scripts": {
     "vscode:prepublish": "pnpm run compile",
     "compile": "tsc -p ./",
