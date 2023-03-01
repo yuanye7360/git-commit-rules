@@ -9,6 +9,15 @@
   "categories": [
     "Other"
   ],
+  "files": [
+    "*.vsix"
+  ],
+  "license": "MIT",
+	"homepage": "https://github.com/yuanye7360/git-commit-rules/blob/main/README.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/yuanye7360/git-commit-rules"
+	},
 	"activationEvents": [
 		"vscodeGitCommit.setMessage",
     "onStartupFinished"
