@@ -8,78 +8,48 @@ const commitRules: Array<CommitRules> = [
   {
     label: "feat✨: ",
     code: "feat: ",
-    description: "引入新功能",
+    description: "新增或調整功能",
   },
   {
     label: "fix🐛: ",
     code: "fix: ",
-    description: "修复bug",
+    description: "修正程式錯誤",
   },
   {
     label: "style💄: ",
     code: "style: ",
-    description: "更新UI样式文件",
-  },
-  {
-    label: "format🥚: ",
-    code: "format: ",
-    description: "格式化代码",
+    description: "coding style 格式修正 -- 不影響程式碼運行的變動",
   },
   {
     label: "docs📝: ",
     code: "docs: ",
-    description: "添加/更新文档",
+    description: "文件更新",
   },
   {
     label: "perf👌: ",
     code: "perf: ",
-    description: "提高性能/优化",
-  },
-  {
-    label: "init🎉: ",
-    code: "init: ",
-    description: "初次提交/初始化项目",
+    description: "效能優化",
   },
   {
     label: "test✅: ",
     code: "test: ",
-    description: "增加测试代码",
+    description: "新增、調整測試",
   },
   {
     label: "refactor🎨: ",
     code: "refactor: ",
-    description: "改进代码结构/代码格式",
+    description: "重構 -- 不是新增功能，也非修正錯誤的程式碼變動",
   },
   {
-    label: "patch🚑: ",
-    code: "patch: ",
-    description: "添加重要补丁",
+    label: "chore🔧: ",
+    code: "chore: ",
+    description: "維護性質的調整 -- 不影響程式碼運行，輔助工具的變動（例如 eslint 套件版本更新）",
   },
   {
-    label: "file📦: ",
-    code: "file: ",
-    description: "添加新文件",
+    label: "reverth🚑: ",
+    code: "revert: ",
+    description: "回退之前的 commit",
   },
-  {
-    label: "publish🚀: ",
-    code: "publish: ",
-    description: "发布新版本",
-  },
-  {
-    label: "tag📌: ",
-    code: "tag: ",
-    description: "发布版本/添加标签",
-  },
-  {
-    label: "config🔧: ",
-    code: "config: ",
-    description: "修改配置文件",
-  },
-  {
-    label: "git🙈: ",
-    code: "git: ",
-    description: "添加或修改.gitignore文件",
-  }
 ];
 
 export default commitRules;
