@@ -22,3 +22,13 @@
 ![image](https://user-images.githubusercontent.com/109936660/222096511-dd7851ee-d7a1-49ff-8a46-b5001df75993.png)
 
 
+### 本地调试
+<img width="406" alt="image" src="https://user-images.githubusercontent.com/109936660/223952598-5fc9cd6a-5afa-4c20-b798-62c25c572a62.png">
+<img width="393" alt="image" src="https://user-images.githubusercontent.com/109936660/223952666-c69ea71c-ffba-4aef-a4bf-4278f9917b9f.png">
+
+### 生成 vscode 插件
+```shell
+npx vsce package
+```
+
+
